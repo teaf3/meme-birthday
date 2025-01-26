@@ -56,7 +56,6 @@
       "Please choose the right",
       "Run away from the pink, if u know u know",
        "I’m just messing with u. I might not show it, but I love u more than u’ll ever know. hope u have a dope year cause u totally deserve it homie ❤️"
-
     ];
 
     const messageContainer = document.getElementById('messages');
@@ -172,9 +171,8 @@
             readyMessage.style.display = "block";
 
             setTimeout(() => {
-              readyMessage.style.display = "none";
-              showReadyInteraction();
-            }, 5000); // Show "Are u ready" for 5 seconds
+              showReadyInteraction(); // Ensure buttons remain after 5 seconds
+            }, 5000);
           } else {
             index++;
             showNextMessage();
