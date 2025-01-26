@@ -55,7 +55,7 @@
       "Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab",
       "Please choose the right",
       "Run away from the pink, if u know u know",
-       "I’m just messing with u. I might not show it, but I love u more than u’ll ever know. hope u have a dope year cause u totally deserve it homie ❤️"
+      "I’m just messing with u. I might not show it, but I love u more than u’ll ever know. hope u have a dope year cause u totally deserve it homie ❤️"
     ];
 
     const messageContainer = document.getElementById('messages');
@@ -171,13 +171,13 @@
             readyMessage.style.display = "block";
 
             setTimeout(() => {
-              showReadyInteraction(); // Ensure buttons remain after 5 seconds
-            }, 5000);
+              showReadyInteraction(); // Ensure buttons remain after 4 seconds
+            }, 4000);
           } else {
             index++;
             showNextMessage();
           }
-        }, index === 0 ? 7000 : 15000); // 7 seconds for HAPPY BIRTHDAY, 15 seconds for others
+        }, index === 0 ? 7000 : 7000); // 7 seconds for each message
       }
     }
 
@@ -186,4 +186,5 @@
   </script>
 </body>
 </html>
+
 
