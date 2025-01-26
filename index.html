@@ -160,24 +160,19 @@
         }
 
         setTimeout(() => {
-          message.style.display = "none";
-
-          if (index === 0) {
-            index++;
-            showNextMessage();
-          } else if (index === 1) {
+          if (index === 1) {
+            message.style.display = "none";
             messageContainer.innerHTML = `<div class="message">Are u ready</div>`;
             const readyMessage = messageContainer.querySelector('.message');
             readyMessage.style.display = "block";
 
-            setTimeout(() => {
-              showReadyInteraction(); // Ensure buttons remain after 4 seconds
-            }, 4000);
+            showReadyInteraction();
           } else {
+            message.style.display = "none";
             index++;
             showNextMessage();
           }
-        }, index === 0 ? 7000 : 7000); // 7 seconds for each message
+        }, index === 0 ? 7000 : (index === 1 ? 4000 : 7000)); // Adjust timing
       }
     }
 
@@ -186,5 +181,4 @@
   </script>
 </body>
 </html>
-
 
