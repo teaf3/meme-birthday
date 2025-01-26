@@ -23,6 +23,7 @@
             font-weight: bold;
             opacity: 0;
             animation: fadeIn 2s forwards;
+            position: absolute;
         }
 
         .hidden {
@@ -96,6 +97,13 @@
             from { opacity: 1; }
             to { opacity: 0; }
         }
+
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
@@ -108,13 +116,13 @@
     </div>
 
     <!-- الرسالة الأولى -->
-    <h1 id="firstText" class="hidden">HAPPY BIRTHDAY LOSER</h1>
+    <h1 id="firstText" class="message hidden">HAPPY BIRTHDAY LOSER</h1>
 
     <!-- الرسالة الثانية -->
-    <p id="secondText" class="hidden">This year, I wish you do these things to ensure everyone’s safety:</p>
+    <p id="secondText" class="message hidden">This year, I wish you do these things to ensure everyone’s safety:</p>
 
     <!-- السؤال مع الأزرار -->
-    <div id="questionContainer" class="hidden">
+    <div id="questionContainer" class="message hidden">
         <p id="questionText">Are you ready?</p>
         <div class="btn-container" id="buttonsContainer">
             <button id="yesButton">Yes</button>
@@ -122,16 +130,16 @@
     </div>
 
     <!-- الرسائل التفاعلية -->
-    <p id="thirdText" class="hidden">Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab</p>
-    <p id="fourthText" class="hidden">Please choose the right men</p>
+    <p id="thirdText" class="message hidden">Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab</p>
+    <p id="fourthText" class="message hidden">Please choose the right men</p>
 
     <!-- الصورة الخاصة بـ Kendall Rory -->
     <div class="image-container" id="imageContainer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Kendall_Jenner_2019.jpg" alt="Kendall Jenner">
     </div>
 
-    <p id="fifthText" class="hidden">Run away from the pink man</p>
-    <p id="sixthText" class="hidden">I love you more than you know homie ❤️</p>
+    <p id="fifthText" class="message hidden">Run away from the pink man</p>
+    <p id="sixthText" class="message hidden">I love you more than you know homie ❤️</p>
 
     <!-- إضافة الصوت -->
     <audio id="drumSound">
