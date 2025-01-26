@@ -22,7 +22,7 @@
             color: #4CAF50;
             font-size: 40px;
             opacity: 0;
-            animation: fadeIn 2s forwards, fireworks 1.5s infinite;
+            animation: fadeIn 2s forwards, fadeOut 1s 3s forwards; /* Fade in, then fade out */
         }
 
         p {
@@ -30,14 +30,14 @@
             font-size: 20px;
             opacity: 0;
             animation: fadeInText 4s forwards;
-            animation-delay: 3s;
+            animation-delay: 5s; /* Delay for text to appear after the first fades */
         }
 
-        /* تأثير فرقعات نارية */
+        /* تأثير الفقاعات النارية */
         @keyframes fireworks {
             0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.5); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
         }
 
         @keyframes fadeIn {
@@ -45,21 +45,27 @@
             to { opacity: 1; }
         }
 
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
         @keyframes fadeInText {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        /* إضافة الفرقعات النارية المتعددة */
+        /* إضافة الفقاعات النارية المتعددة */
         .fireworks {
             position: absolute;
             top: 10%;
             left: 50%;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
             background-color: #ff0;
             border-radius: 50%;
             animation: explode 2s infinite;
+            opacity: 0;
         }
 
         .fireworks:nth-child(odd) {
@@ -78,7 +84,7 @@
                 opacity: 1;
             }
             100% {
-                transform: scale(10);
+                transform: scale(5);
                 opacity: 0;
                 top: 90%;
                 left: 100%;
@@ -100,9 +106,12 @@
         // تغيير النص بعد ظهور الرسالة الأولى
         window.onload = function() {
             setTimeout(function() {
-                document.getElementById("mainText").style.opacity = "0";
-                document.getElementById("secondText").style.opacity = "1";
-            }, 3000); // الانتظار 3 ثواني بعد ظهور النص الأول لعرض النص الثاني
+                document.getElementById("mainText").style.opacity = "0"; // إخفاء النص الأول
+            }, 5000); // إخفاء النص بعد 5 ثوانٍ
+
+            setTimeout(function() {
+                document.getElementById("secondText").style.opacity = "1"; // إظهار النص الثاني
+            }, 5000); // بعد إخفاء النص الأول مباشرة
         }
     </script>
 </body>
