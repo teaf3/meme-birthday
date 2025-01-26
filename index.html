@@ -1,119 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Message</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f4f4f9;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f9;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-        h1 {
-            color: #4CAF50;
-            font-size: 40px;
-            opacity: 0;
-            animation: fadeIn 2s forwards, fadeOut 1s 3s forwards;
-        }
+        h1, p {
+            color: #4CAF50;
+            font-size: 25px;
+            opacity: 0;
+            animation: fadeIn 2s forwards, fadeOut 1s 5s forwards; /* Fade in first, then fade out after 5 seconds */
+        }
 
-        p {
-            color: #333;
-            font-size: 20px;
-            opacity: 0;
-            animation: fadeInText 4s forwards;
-            animation-delay: 5s;
-        }
+        p {
+            font-size: 20px;
+            color: #333;
+            animation-delay: 6s;
+        }
 
-        /* تأثير الفقاعات النارية */
-        @keyframes fireworks {
-            0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(2); opacity: 1; }
-            100% { transform: scale(1); opacity: 0; }
-        }
+        /* تأثير الفقاعات النارية */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
 
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
+        /* تأثير الصوت */
+        audio {
+            display: none;
+        }
 
-        @keyframes fadeInText {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        /* الصورة في الجملة الثانية */
+        .image-container {
+            display: none;
+            margin-top: 20px;
+        }
 
-        /* إضافة الفقاعات النارية المتعددة */
-        .fireworks {
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            width: 15px;
-            height: 15px;
-            background-color: #ff0;
-            border-radius: 50%;
-            animation: explode 2s infinite;
-            opacity: 0;
-        }
+        .image-container img {
+            width: 200px;
+            height: auto;
+        }
 
-        .fireworks:nth-child(odd) {
-            background-color: #ff3d00;
-            animation-delay: 0.5s;
-        }
+        /* تنسيق الأزرار */
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
 
-        .fireworks:nth-child(even) {
-            background-color: #ffeb3b;
-            animation-delay: 1s;
-        }
+        .btn-container button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-        @keyframes explode {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(5);
-                opacity: 0;
-                top: 90%;
-                left: 100%;
-            }
-        }
-    </style>
+        .btn-container button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
 </head>
 <body>
-    <h1 id="mainText">Happy Birthday!</h1>
-    <p id="secondText">I still love you anyway. I wish you happy and successful years ahead.</p>
 
-    <!-- الفقاعات النارية -->
-    <div class="fireworks"></div>
-    <div class="fireworks"></div>
-    <div class="fireworks"></div>
-    <div class="fireworks"></div>
-    <div class="fireworks"></div>
+    <!-- الرسالة الأولى -->
+    <h1 id="firstText">Happy Birthday Loser!</h1>
+    <!-- الرسالة الثانية -->
+    <p id="secondText">This year, I wish you do these things to ensure everyone’s safety:</p>
 
-    <script>
-        // تغيير النص بعد ظهور الرسالة الأولى
-        window.onload = function() {
-            setTimeout(function() {
-                document.getElementById("mainText").style.opacity = "0"; // إخفاء النص الأول
-            }, 5000); // إخفاء النص بعد 5 ثوانٍ
+    <!-- قائمة النصوص التي ستظهر -->
+    <p id="thirdText">1-1- Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab</p>
+    <p id="fourthText">2- Please choose the right men</p>
+    
+    <!-- صورة كيندال روري -->
+    <div class="image-container" id="imageContainer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Kendall_Jenner_2019.jpg" alt="Kendall Jenner">
+    </div>
 
-            setTimeout(function() {
-                document.getElementById("secondText").style.opacity = "1"; // إظهار النص الثاني
-            }, 5000); // بعد إخفاء النص الأول مباشرة
-        }
-    </script>
+    <p id="fifthText">3- Run away from the pink man</p>
+
+    <!-- النص الأخير -->
+    <p id="sixthText">I love you, always be fine and happy years to you, homie! ❤️</p>
+
+    <!-- إضافة الصوت -->
+    <audio id="drumSound">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- سؤال مع الأزرار -->
+    <div id="questionContainer">
+        <p id="questionText">Are you ready?</p>
+        <div class="btn-container" id="buttonsContainer">
+            <button id="yesButton">Yes</button>
+            <button id="noButton">No</button>
+        </div>
+    </div>
+
+    <script>
+        // تنفيذ التأثيرات النصية
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById("firstText").style.opacity = "1"; // إظهار أول رسالة
+            }, 1000);
+
+            setTimeout(function() {
+                document.getElementById("firstText").style.opacity = "0"; // إخفاء الرسالة الأولى
+            }, 5000);
+
+            setTimeout(function() {
+                document.getElementById("secondText").style.opacity = "1"; // إظهار الرسالة الثانية
+            }, 6000);
+
+            setTimeout(function() {
+                document.getElementById("secondText").style.opacity = "0"; // إخفاء الرسالة الثانية
+            }, 10000);
+
+            // يبدأ الصوت بعد ظهور الجملة "This year..."
+            setTimeout(function() {
+                document.getElementById("drumSound").play(); // تشغيل الصوت بعد 6 ثوانٍ
+            }, 6000);
+
+            setTimeout(function() {
+                document.getElementById("thirdText").style.opacity = "1"; // إظهار الرسالة الثالثة
+            }, 11000);
+
+            setTimeout(function() {
+                document.getElementById("thirdText").style.opacity = "0"; // إخفاء الرسالة الثالثة
+            }, 15000);
+
+            setTimeout(function() {
+                document.getElementById("fourthText").style.opacity = "1"; // إظهار الرسالة الرابعة
+            }, 16000);
+
+            setTimeout(function() {
+                document.getElementById("imageContainer").style.display = "block"; // إظهار صورة كيندال
+            }, 17000);
+
+            setTimeout(function() {
+                document.getElementById("fourthText").style.opacity = "0"; // إخفاء الرسالة الرابعة
+            }, 20000);
+
+            setTimeout(function() {
+                document.getElementById("fifthText").style.opacity = "1"; // إظهار الرسالة الخامسة
+            }, 21000);
+
+            setTimeout(function() {
+                document.getElementById("fifthText").style.opacity = "0"; // إخفاء الرسالة الخامسة
+            }, 25000);
+
+            setTimeout(function() {
+                document.getElementById("sixthText").style.opacity = "1"; // إظهار الرسالة الأخيرة
+            }, 26000);
+        }
+
+        // عند الضغط على أي زر
+        document.getElementById("yesButton").onclick = function() {
+            document.getElementById("questionContainer").style.display = "none"; // إخفاء السؤال
+            document.getElementById("buttonsContainer").style.display = "none"; // إخفاء الأزرار
+        }
+
+        document.getElementById("noButton").onclick = function() {
+            alert("Sorry, try again later!"); // عند الضغط على "No"
+        }
+    </script>
+
 </body>
 </html>
