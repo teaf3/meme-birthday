@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f9;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 40px;
+            opacity: 0;
+            animation: fadeIn 2s forwards, fireworks 1.5s infinite;
+        }
+
+        p {
+            color: #333;
+            font-size: 20px;
+            opacity: 0;
+            animation: fadeInText 4s forwards;
+            animation-delay: 3s;
+        }
+
+        /* تأثير فرقعات نارية */
+        @keyframes fireworks {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* إضافة الفرقعات النارية المتعددة */
+        .fireworks {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0;
+            border-radius: 50%;
+            animation: explode 2s infinite;
+        }
+
+        .fireworks:nth-child(odd) {
+            background-color: #ff3d00;
+            animation-delay: 0.5s;
+        }
+
+        .fireworks:nth-child(even) {
+            background-color: #ffeb3b;
+            animation-delay: 1s;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(10);
+                opacity: 0;
+                top: 90%;
+                left: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="mainText">Happy Birthday!</h1>
+    <p id="secondText">I still love you anyway. I wish you happy and successful years ahead.</p>
+
+    <div class="fireworks"></div>
+    <div class="fireworks"></div>
+    <div class="fireworks"></div>
+    <div class="fireworks"></div>
+    <div class="fireworks"></div>
+
+    <script>
+        // تغيير النص بعد ظهور الرسالة الأولى
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById("mainText").style.opacity = "0";
+                document.getElementById("secondText").style.opacity = "1";
+            }, 3000); // الانتظار 3 ثواني بعد ظهور النص الأول لعرض النص الثاني
+        }
+    </script>
+</body>
+</html>
