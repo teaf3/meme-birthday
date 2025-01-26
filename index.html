@@ -46,23 +46,23 @@
   <div id="messages"></div>
   <script>
     const messages = [
-      "HAPPY BIRTHDAY",
+      "HAPPY BIRTHDAY LOSER",
       "This year I wish u do these things to ensure everyone's safety",
       "Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab",
-      "Please choose the right",
-      "Run away from the pink",
-      "I love u more than u know homie❤️"
+      "Please choose the right men",
+      "Run away from the pink one n/ If you know you know",
+      "I’m just messing with u. I might not show it, but I love u more than u’ll ever know. hope u have a dope year cause u totally deserve it homie ❤️"
     ];
 
     const messageContainer = document.getElementById('messages');
     let index = 0;
 
-    function showInteractions() {
+    function showReadyInteraction() {
       const btn1 = document.createElement('button');
       const btn2 = document.createElement('button');
 
-      btn1.textContent = "Click Me";
-      btn2.textContent = "No, Click Me";
+      btn1.textContent = "YES";
+      btn2.textContent = "YES";
 
       btn1.style.display = 'block';
       btn2.style.display = 'block';
@@ -73,6 +73,7 @@
       const handleClick = () => {
         btn1.remove();
         btn2.remove();
+        index++;
         showNextMessage();
       };
 
@@ -90,7 +91,17 @@
           message.style.display = "none";
 
           if (index === 0) {
-            showInteractions();
+            index++;
+            showNextMessage();
+          } else if (index === 1) {
+            messageContainer.innerHTML = `<div class="message">Are u ready</div>`;
+            const readyMessage = messageContainer.querySelector('.message');
+            readyMessage.style.display = "block";
+
+            setTimeout(() => {
+              readyMessage.style.display = "none";
+              showReadyInteraction();
+            }, 5000); // Show "Are u ready" for 5 seconds
           } else {
             index++;
             showNextMessage();
@@ -104,4 +115,3 @@
   </script>
 </body>
 </html>
-
