@@ -130,27 +130,19 @@
     }
 
     function showReadyInteraction() {
-      const buttonsDiv = document.createElement('div');
-      buttonsDiv.classList.add('buttons');
+      const btn = document.createElement('button');
 
-      const btn1 = document.createElement('button');
-      const btn2 = document.createElement('button');
+      btn.textContent = "YES";
+      btn.style.display = 'block';
+      btn.style.margin = '20px auto';
 
-      btn1.textContent = "YES";
-      btn2.textContent = "YES";
+      messageContainer.appendChild(btn);
 
-      buttonsDiv.appendChild(btn1);
-      buttonsDiv.appendChild(btn2);
-      messageContainer.appendChild(buttonsDiv);
-
-      const handleClick = () => {
-        buttonsDiv.remove();
+      btn.addEventListener('click', () => {
+        btn.remove();
         index++;
         showNextMessage();
-      };
-
-      btn1.addEventListener('click', handleClick);
-      btn2.addEventListener('click', handleClick);
+      });
     }
 
     function showNextMessage() {
@@ -185,4 +177,3 @@
   </script>
 </body>
 </html>
-
