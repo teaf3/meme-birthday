@@ -131,10 +131,10 @@
       messageContainer.appendChild(button);
 
       setTimeout(() => {
-        button.remove();
+        button.remove(); // Remove button after 3 seconds
         index++;
         showNextMessage();
-      }, 3000); // Button stays for 3 seconds
+      }, 3000);
     }
 
     function showNextMessage() {
@@ -169,4 +169,3 @@
   </script>
 </body>
 </html>
-
