@@ -32,12 +32,6 @@
       height: 100%;
       z-index: 1;
     }
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
     button {
       padding: 10px 20px;
       font-size: 1.5em;
@@ -46,6 +40,7 @@
       border-radius: 5px;
       background: #007BFF;
       color: white;
+      display: none;
     }
   </style>
 </head>
@@ -130,19 +125,16 @@
     }
 
     function showReadyInteraction() {
-      const btn = document.createElement('button');
+      const button = document.createElement('button');
+      button.textContent = "YES";
+      button.style.display = 'block';
+      messageContainer.appendChild(button);
 
-      btn.textContent = "YES";
-      btn.style.display = 'block';
-      btn.style.margin = '20px auto';
-
-      messageContainer.appendChild(btn);
-
-      btn.addEventListener('click', () => {
-        btn.remove();
+      setTimeout(() => {
+        button.remove();
         index++;
         showNextMessage();
-      });
+      }, 3000); // Button stays for 3 seconds
     }
 
     function showNextMessage() {
@@ -177,3 +169,4 @@
   </script>
 </body>
 </html>
+
