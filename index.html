@@ -24,10 +24,13 @@
       text-transform: uppercase;
       display: none;
     }
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      10%, 90% { opacity: 1; }
-      100% { opacity: 0; }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
     }
     button {
       margin: 20px auto;
@@ -43,19 +46,85 @@
   </style>
 </head>
 <body>
+  <canvas id="fireworks"></canvas>
   <div id="messages"></div>
   <script>
     const messages = [
-      "HAPPY BIRTHDAY LOSER",
+      "HAPPY BIRTHDAY",
       "This year I wish u do these things to ensure everyone's safety",
       "Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab",
-      "Please choose the right men",
-      "Run away from the pink one n/ If you know you know",
-      "I’m just messing with u. I might not show it, but I love u more than u’ll ever know. hope u have a dope year cause u totally deserve it homie ❤️"
+      "Please choose the right",
+      "Run away from the pink, if u know u know",
+       "I’m just messing with u. I might not show it, but I love u more than u’ll ever know. hope u have a dope year cause u totally deserve it homie ❤️"
+
     ];
 
     const messageContainer = document.getElementById('messages');
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
     let index = 0;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fireworks = [];
+
+    class Firework {
+      constructor(x, y, colors) {
+        this.x = x;
+        this.y = y;
+        this.colors = colors;
+        this.particles = [];
+        for (let i = 0; i < 100; i++) {
+          this.particles.push({
+            x: this.x,
+            y: this.y,
+            vx: (Math.random() - 0.5) * 4,
+            vy: (Math.random() - 0.5) * 4,
+            life: 100,
+            alpha: 1,
+            color: this.colors[Math.floor(Math.random() * this.colors.length)],
+          });
+        }
+      }
+
+      draw() {
+        this.particles.forEach((particle) => {
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${particle.color.join(',')},${particle.alpha})`;
+          ctx.fill();
+
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          particle.alpha -= 0.01;
+          particle.life--;
+        });
+        this.particles = this.particles.filter((particle) => particle.life > 0);
+      }
+    }
+
+    function createFireworks() {
+      fireworks.push(new Firework(Math.random() * canvas.width, Math.random() * canvas.height, [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0]]));
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      fireworks.forEach((firework, i) => {
+        firework.draw();
+        if (firework.particles.length === 0) {
+          fireworks.splice(i, 1);
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+
+    function triggerFireworks() {
+      const interval = setInterval(createFireworks, 200);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 5000); // Fireworks last for 5 seconds
+    }
 
     function showReadyInteraction() {
       const btn1 = document.createElement('button');
@@ -87,6 +156,10 @@
         const message = messageContainer.querySelector('.message');
         message.style.display = "block";
 
+        if (index === 0) {
+          triggerFireworks();
+        }
+
         setTimeout(() => {
           message.style.display = "none";
 
@@ -110,8 +183,9 @@
       }
     }
 
-    // Start the sequence
+    animate();
     showNextMessage();
   </script>
 </body>
 </html>
+
