@@ -1,220 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Message</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            position: relative;
-        }
-
-        h1, p {
-            font-size: 30px;
-            font-weight: bold;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            position: absolute;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .fireworks {
-            position: absolute;
-            z-index: 1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* تأثير الألعاب النارية */
-        @keyframes fireworks {
-            0% { transform: scale(0); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
-            100% { transform: scale(0); opacity: 0; }
-        }
-
-        .fireworks img {
-            animation: fireworks 1s infinite;
-            position: absolute;
-        }
-
-        /* تأثير السؤال */
-        .btn-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-        }
-
-        .btn-container button {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 18px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn-container button:hover {
-            background-color: #45a049;
-        }
-
-        .image-container {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .image-container img {
-            width: 200px;
-            height: auto;
-        }
-
-        audio {
-            display: none;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-
-        .message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+    .fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .message {
+      text-align: center;
+      z-index: 2;
+      font-size: 2em;
+      text-transform: uppercase;
+      display: none;
+      animation: fadeInOut 1s ease-in-out forwards;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10%, 90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    button {
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 1.5em;
+      cursor: pointer;
+      display: none;
+      border: none;
+      border-radius: 5px;
+      background: #007BFF;
+      color: white;
+    }
+    .image {
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <canvas class="fireworks"></canvas>
+  <div id="messages"></div>
+  <div class="image">
+    <img src="/mnt/data/IMG_1721.JPG" alt="Rory Kendall" style="max-width: 100%; height: auto;">
+  </div>
 
-    <!-- تأثير الألعاب النارية -->
-    <div class="fireworks">
-        <img src="https://cdn.pixabay.com/photo/2016/12/12/00/15/fireworks-1904921_960_720.png" alt="Fireworks" width="50" height="50">
-        <img src="https://cdn.pixabay.com/photo/2016/12/12/00/15/fireworks-1904921_960_720.png" alt="Fireworks" width="50" height="50">
-        <img src="https://cdn.pixabay.com/photo/2016/12/12/00/15/fireworks-1904921_960_720.png" alt="Fireworks" width="50" height="50">
-    </div>
+  <script>
+    const messages = [
+      "HAPPY BIRTHDAY",
+      "This year I wish u do these things to ensure everyone's safety",
+      "Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab",
+      "Please choose the right",
+      "Run away from the pink",
+      "I love u more than u know homie❤️"
+    ];
 
-    <!-- الرسالة الأولى -->
-    <h1 id="firstText" class="message hidden">HAPPY BIRTHDAY LOSER</h1>
+    const messageContainer = document.getElementById('messages');
+    const imageContainer = document.querySelector('.image');
+    let index = 0;
 
-    <!-- الرسالة الثانية -->
-    <p id="secondText" class="message hidden">This year, I wish you do these things to ensure everyone’s safety:</p>
+    function showNextMessage() {
+      if (index < messages.length) {
+        messageContainer.innerHTML = `<div class="message">${messages[index]}</div>`;
+        const message = messageContainer.querySelector('.message');
+        message.style.display = "block";
 
-    <!-- السؤال مع الأزرار -->
-    <div id="questionContainer" class="message hidden">
-        <p id="questionText">Are you ready?</p>
-        <div class="btn-container" id="buttonsContainer">
-            <button id="yesButton">Yes</button>
-        </div>
-    </div>
+        setTimeout(() => {
+          message.style.display = "none";
+          index++;
 
-    <!-- الرسائل التفاعلية -->
-    <p id="thirdText" class="message hidden">Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab</p>
-    <p id="fourthText" class="message hidden">Please choose the right men</p>
+          if (index === 3) {
+            imageContainer.style.display = "block";
+            setTimeout(() => {
+              imageContainer.style.display = "none";
+              showNextMessage();
+            }, 3000);
+          } else {
+            showNextMessage();
+          }
+        }, 3000);
+      }
+    }
 
-    <!-- الصورة الخاصة بـ Kendall Rory -->
-    <div class="image-container" id="imageContainer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Kendall_Jenner_2019.jpg" alt="Kendall Jenner">
-    </div>
-
-    <p id="fifthText" class="message hidden">Run away from the pink man</p>
-    <p id="sixthText" class="message hidden">I love you more than you know homie ❤️</p>
-
-    <!-- إضافة الصوت -->
-    <audio id="drumSound">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-
-    <script>
-        window.onload = function() {
-            // أول شيء يظهر الرسالة "HAPPY BIRTHDAY LOSER" مع الألعاب النارية
-            setTimeout(function() {
-                document.getElementById("firstText").style.opacity = "1";
-                document.getElementById("fireworks").style.display = "block";
-            }, 1000);
-
-            setTimeout(function() {
-                document.getElementById("firstText").style.opacity = "0";
-                document.getElementById("fireworks").style.display = "none";
-            }, 10000);
-
-            // بعد 10 ثواني تظهر الرسالة الثانية
-            setTimeout(function() {
-                document.getElementById("secondText").style.opacity = "1";
-            }, 11000);
-
-            // بعد 15 ثانية يظهر السؤال "Are you ready?"
-            setTimeout(function() {
-                document.getElementById("questionContainer").style.opacity = "1";
-            }, 16000);
-
-            // بعد 2 ثانية يظهر الصوت عند الضغط على الزر
-            document.getElementById("yesButton").onclick = function() {
-                document.getElementById("questionContainer").style.display = "none";
-                document.getElementById("buttonsContainer").style.display = "none";
-
-                // تظهر الرسائل بالتتابع
-                setTimeout(function() {
-                    document.getElementById("thirdText").style.opacity = "1";
-                }, 2000);
-
-                setTimeout(function() {
-                    document.getElementById("thirdText").style.opacity = "0";
-                }, 8000);
-
-                setTimeout(function() {
-                    document.getElementById("fourthText").style.opacity = "1";
-                }, 9000);
-
-                // تشغيل الصوت قرع الطبول
-                setTimeout(function() {
-                    document.getElementById("drumSound").play();
-                }, 10000);
-
-                setTimeout(function() {
-                    document.getElementById("imageContainer").style.display = "block"; // تظهر الصورة
-                }, 10000);
-
-                setTimeout(function() {
-                    document.getElementById("fourthText").style.opacity = "0";
-                }, 15000);
-
-                setTimeout(function() {
-                    document.getElementById("fifthText").style.opacity = "1";
-                }, 16000);
-
-                setTimeout(function() {
-                    document.getElementById("fifthText").style.opacity = "0";
-                }, 20000);
-
-                setTimeout(function() {
-                    document.getElementById("sixthText").style.opacity = "1";
-                }, 21000);
-            };
-        }
-    </script>
-
+    // Start the sequence
+    showNextMessage();
+  </script>
 </body>
 </html>
