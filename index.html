@@ -50,7 +50,7 @@
   <div id="messages"></div>
   <script>
     const messages = [
-      "HAPPY BIRTHDAY",
+      "HAPPY BIRTHDAY LOSERRRR",
       "This year I wish u do these things to ensure everyone's safety",
       "Not mentioning the name of Mashael / Layan / Lujain / Layal / Musab",
       "Please choose the right",
@@ -123,7 +123,7 @@
       const interval = setInterval(createFireworks, 200);
       setTimeout(() => {
         clearInterval(interval);
-      }, 5000); // Fireworks last for 5 seconds
+      }, 7000); // Fireworks last for 7 seconds
     }
 
     function showReadyInteraction() {
@@ -179,7 +179,7 @@
             index++;
             showNextMessage();
           }
-        }, 15000); // 15 seconds for each message
+        }, index === 0 ? 7000 : 15000); // 7 seconds for HAPPY BIRTHDAY, 15 seconds for others
       }
     }
 
